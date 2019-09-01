@@ -37,6 +37,16 @@ public class dev_userController {
 	     }
 	     return"/developer/main";
 	}
+	//注销操作
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		dev_user user=(dev_user)session.getAttribute("devUser");
+		if(user!=null){
+			session.removeAttribute("devUser");
+		}
+		return "devlogin";
+	}
+	//局部异常处理
 	@ExceptionHandler(value={RuntimeException.class})
 	public String error(RuntimeException e,HttpServletRequest request){
 		request.setAttribute("error", e.getMessage());
