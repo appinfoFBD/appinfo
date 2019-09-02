@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.appsys.pojo.dev_user;
-import cn.appsys.service.dev_userService;
+import cn.appsys.service.userService;
 @Controller
 @RequestMapping("/devUser")
-public class dev_userController {
-	@Resource(name="dev_userService")
-	private dev_userService dev_userService;
+public class userController {
+	@Resource(name="userService")
+	private userService userService;
      //跳转到登录页面
 	@RequestMapping(value="/login")
 	 public String login(){
@@ -25,7 +25,7 @@ public class dev_userController {
 	@RequestMapping("/doLogin")
 	//登录
 	public String doLogin(@RequestParam("devCode")String devCode,@RequestParam("devPassword") String devPassword,HttpSession session){
-	     dev_user user=dev_userService.findLogin(devCode);
+	     dev_user user=userService.findLogin(devCode);
 	     if(user==null){
 	    	 throw new RuntimeException("用户名错误");
 	     }else{

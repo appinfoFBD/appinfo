@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "mybatis-3-mapper"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.appsys.dao.dev_userMapper">
+<mapper namespace="cn.appsys.dao.userMapper">
     <select id="findLogin" resultType="dev_user">
        SELECT * FROM dev_user where devCode=#{devCode}
     </select>

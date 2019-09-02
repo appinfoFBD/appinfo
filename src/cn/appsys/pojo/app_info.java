@@ -15,6 +15,72 @@ public class app_info {
 	private String appInfo; // 应用简介
 	private BigInteger status;// 状态
 	private Date onSaleDate; // 上架时间
+	private String flatformName;
+	private String downloads;
+	private BigInteger versionId;
+
+	public BigInteger getVersionId() {
+		return versionId;
+	}
+
+	public void setVersionId(BigInteger versionId) {
+		this.versionId = versionId;
+	}
+
+	private String categoryLevel2Name;
+	private String categoryLevel3Name;
+	private String statusName;
+	private String versionNo;
+
+	public String getFlatformName() {
+		return flatformName;
+	}
+
+	public void setFlatformName(String flatformName) {
+		this.flatformName = flatformName;
+	}
+
+	private String categoryLevel1Name;
+
+	public String getCategoryLevel1Name() {
+		return categoryLevel1Name;
+	}
+
+	public void setCategoryLevel1Name(String categoryLevel1Name) {
+		this.categoryLevel1Name = categoryLevel1Name;
+	}
+
+	public String getCategoryLevel2Name() {
+		return categoryLevel2Name;
+	}
+
+	public void setCategoryLevel2Name(String categoryLevel2Name) {
+		this.categoryLevel2Name = categoryLevel2Name;
+	}
+
+	public String getCategoryLevel3Name() {
+		return categoryLevel3Name;
+	}
+
+	public void setCategoryLevel3Name(String categoryLevel3Name) {
+		this.categoryLevel3Name = categoryLevel3Name;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public String getVersionNo() {
+		return versionNo;
+	}
+
+	public void setVersionNo(String versionNo) {
+		this.versionNo = versionNo;
+	}
 
 	public BigInteger getId() {
 		return id;
@@ -102,5 +168,13 @@ public class app_info {
 
 	public void setOnSaleDate(Date onSaleDate) {
 		this.onSaleDate = onSaleDate;
+	}
+
+	public String getDownloads() {
+		return downloads;
+	}
+
+	public void setDownloads(String downloads) {
+		this.downloads = downloads;
 	}
 }
