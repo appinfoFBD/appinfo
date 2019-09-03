@@ -1,4 +1,4 @@
-package cn.appsys.dao;
+package cn.appsys.dao.developer;
 
 import java.util.List;
 

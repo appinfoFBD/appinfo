@@ -1,4 +1,4 @@
-package cn.appsys.controller;
+package cn.appsys.controller.developer;
 
 import java.util.List;
 
@@ -16,11 +16,8 @@ import com.alibaba.fastjson.JSON;
 import cn.appsys.pojo.app_category;
 import cn.appsys.pojo.app_info;
 import cn.appsys.pojo.data_dictionary;
-import cn.appsys.service.appInfoService;
-import cn.appsys.service.categoryService;
-import cn.appsys.service.dictionaryService;
 import cn.appsys.tools.Pager;
-
+import cn.appsys.service.developer.*;
 @Controller
 @RequestMapping("/devApp")
 public class appController {

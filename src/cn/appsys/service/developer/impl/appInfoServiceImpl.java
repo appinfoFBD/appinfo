@@ -1,13 +1,13 @@
-package cn.appsys.service.impl;
+package cn.appsys.service.developer.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.appsys.dao.appInfoMapper;
+import cn.appsys.dao.developer.appInfoMapper;
 import cn.appsys.pojo.app_info;
-import cn.appsys.service.appInfoService;
+import cn.appsys.service.developer.appInfoService;
 @Service("appInfoService")
 public class appInfoServiceImpl implements appInfoService {
 	@Autowired

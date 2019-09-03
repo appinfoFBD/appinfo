@@ -1,4 +1,4 @@
-package cn.appsys.controller;
+package cn.appsys.controller.developer;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.appsys.pojo.dev_user;
-import cn.appsys.service.userService;
+import cn.appsys.service.developer.*;
 @Controller
 @RequestMapping("/devUser")
 public class userController {
