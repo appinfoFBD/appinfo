@@ -27,7 +27,7 @@ PUBLIC "mybatis-3-mapper"
 		<where>
 			<if test="softwareName!=null">and a.softwareName like CONCAT('%',#{softwareName},'%')
 			</if>
-			<if test="status!=null">and a.`status`=#{status} and</if>
+			<if test="status!=null">and a.`status`=#{status}</if>
 			<if test="flatformId!=null"> and a.flatformId=#{flatformId}</if>
 			<if test="categoryLevel1!=null">and a.categoryLevel1=#{categoryLevel1}</if>
 			<if test="categoryLevel2!=null">and a.categoryLevel2=#{categoryLevel2}</if>

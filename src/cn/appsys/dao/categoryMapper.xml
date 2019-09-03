@@ -4,6 +4,9 @@ PUBLIC "mybatis-3-mapper"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.categoryMapper">
   <select id="selectCategory1" resultType="app_category">
-     select * FROM app_category where parentId=1
+     select * FROM app_category where  parentId IS NULL
+  </select>
+  <select id="selectCategory" resultType="app_category">
+    select * FROM app_category  where parentId=#{parentId}
   </select>
 </mapper>
