@@ -19,4 +19,6 @@ public interface appInfoService {
 			@Param("categoryLevel2") Integer categoryLevel2, @Param("categoryLevel3") Integer categoryLevel3);
 	//添加app信息
 	public boolean appAdd(app_info app);
+	//验证PAK是否存在
+	public app_info findApp(String PAKName);
 }

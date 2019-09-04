@@ -174,4 +174,19 @@ public class appController {
 		return "/developer/appinfoadd";
 
 	}
+	//验证apk是否存在
+	@RequestMapping("/apkexist.json")
+	@ResponseBody
+	public Object apkexist(@RequestParam("APKName")String APKName){
+		String status="";
+		app_info app=appInfoService.findApp(APKName);
+		if(APKName==null || APKName==""){
+			status="empty";
+		}else if(app!=null){
+			 status="exist";
+		}else{
+			status="noexist";
+		}
+		return"{\"APKName\":\""+status+"\"}";
+	}
 }

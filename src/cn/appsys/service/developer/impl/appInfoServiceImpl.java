@@ -35,4 +35,9 @@ public class appInfoServiceImpl implements appInfoService {
 		return false;
 	}
 
+	@Override
+	public app_info findApp(String PAKName) {
+		return appinfoMapper.findApp(PAKName);
+	}
+
 }

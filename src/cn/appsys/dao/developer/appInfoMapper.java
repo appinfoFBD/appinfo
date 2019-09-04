@@ -22,4 +22,6 @@ public interface appInfoMapper {
             @Param("categoryLevel3") Integer categoryLevel3);
 	//添加app信息
 	public int appAdd(app_info app);
+	//按添加查询
+	public app_info findApp(@Param("APKName")String APKName);
 }

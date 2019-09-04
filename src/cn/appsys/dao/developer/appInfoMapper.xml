@@ -56,4 +56,7 @@ PUBLIC "mybatis-3-mapper"
 	   createdBy,creationDate)
 	   value(#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{downloads},#{flatformId},#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{status},#{appInfo},#{logoPicPath},#{logoLocPath},#{createdBy},#{creationDate})
 	</insert>
+	<select id="findApp" resultType="app_info">
+	  select * from app_info where APKName=#{APKName}
+	</select>
 </mapper>
