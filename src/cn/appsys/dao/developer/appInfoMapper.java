@@ -20,4 +20,6 @@ public interface appInfoMapper {
             @Param("categoryLevel1") Integer categoryLevel1,
             @Param("categoryLevel2") Integer categoryLevel2,
             @Param("categoryLevel3") Integer categoryLevel3);
+	//ÃÌº”app–≈œ¢
+	public int appAdd(app_info app);
 }

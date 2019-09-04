@@ -17,4 +17,6 @@ public interface appInfoService {
 	public int count(@Param("softwareName") String softwareName, @Param("status") Integer status,
 			@Param("flatformId") Integer flatformId, @Param("categoryLevel1") Integer categoryLevel1,
 			@Param("categoryLevel2") Integer categoryLevel2, @Param("categoryLevel3") Integer categoryLevel3);
+	//ÃÌº”app–≈œ¢
+	public boolean appAdd(app_info app);
 }

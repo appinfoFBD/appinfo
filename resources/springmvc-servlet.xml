@@ -16,7 +16,7 @@
     http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	<context:component-scan base-package="cn.appsys.controller" />
 	<mvc:annotation-driven>
-	  <mvc:message-converters>
+		<mvc:message-converters>
 			<!-- 响应的数据转换 -->
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 				<property name="supportedMediaTypes">
@@ -41,7 +41,7 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	<mvc:resources location="/statics/" mapping="/statics/**"/>
+	<mvc:resources location="/statics/" mapping="/statics/**" />
 	<!-- 支持文件上传 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

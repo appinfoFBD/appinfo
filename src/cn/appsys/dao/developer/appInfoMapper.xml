@@ -4,7 +4,7 @@ PUBLIC "mybatis-3-mapper"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.developer.appInfoMapper">
 	<select id="selectAppInfo" resultType="app_info">
-		select a.softwareName,a.APKName,a.softwareSize,
+		select a.softwareName,a.APKName,a.softwareSize,a.status,
 		(SELECT d.valueName
 		FROM data_dictionary d where a.flatformId=d.valueId AND
 		typeCode='APP_FLATFORM') AS flatformName,
@@ -47,4 +47,13 @@ PUBLIC "mybatis-3-mapper"
 			<if test="categoryLevel3!=null">and categoryLevel3=#{categoryLevel3}</if>
 		</where>
 	</select>
+	<insert id="appAdd">
+	   insert INTO app_info
+	   (softwareName,APKName,supportROM,
+	   interfaceLanguage,softwareSize,
+	   downloads,flatformId,categoryLevel1,
+	   categoryLevel2,categoryLevel3,status,appInfo,logoPicPath,logoLocPath,
+	   createdBy,creationDate)
+	   value(#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{downloads},#{flatformId},#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{status},#{appInfo},#{logoPicPath},#{logoLocPath},#{createdBy},#{creationDate})
+	</insert>
 </mapper>

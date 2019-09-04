@@ -15,9 +15,17 @@ public class app_info {
 	private String appInfo; // 应用简介
 	private BigInteger status;// 状态
 	private Date onSaleDate; // 上架时间
+	private BigInteger createdBy; // 创建者
+	private Date creationDate; // 创建时间
+	private String logoPicPath;
+	private String logoLocPath;
+	private BigInteger flatformId;
 	private String flatformName;
 	private String downloads;
 	private BigInteger versionId;
+	private BigInteger categoryLevel1;
+	private BigInteger categoryLevel2;
+	private BigInteger categoryLevel3;
 
 	public BigInteger getVersionId() {
 		return versionId;
@@ -176,5 +184,69 @@ public class app_info {
 
 	public void setDownloads(String downloads) {
 		this.downloads = downloads;
+	}
+
+	public BigInteger getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(BigInteger createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public String getLogoPicPath() {
+		return logoPicPath;
+	}
+
+	public void setLogoPicPath(String logoPicPath) {
+		this.logoPicPath = logoPicPath;
+	}
+
+	public String getLogoLocPath() {
+		return logoLocPath;
+	}
+
+	public void setLogoLocPath(String logoLocPath) {
+		this.logoLocPath = logoLocPath;
+	}
+
+	public BigInteger getFlatformId() {
+		return flatformId;
+	}
+
+	public void setFlatformId(BigInteger flatformId) {
+		this.flatformId = flatformId;
+	}
+
+	public BigInteger getCategoryLevel1() {
+		return categoryLevel1;
+	}
+
+	public void setCategoryLevel1(BigInteger categoryLevel1) {
+		this.categoryLevel1 = categoryLevel1;
+	}
+
+	public BigInteger getCategoryLevel2() {
+		return categoryLevel2;
+	}
+
+	public void setCategoryLevel2(BigInteger categoryLevel2) {
+		this.categoryLevel2 = categoryLevel2;
+	}
+
+	public BigInteger getCategoryLevel3() {
+		return categoryLevel3;
+	}
+
+	public void setCategoryLevel3(BigInteger categoryLevel3) {
+		this.categoryLevel3 = categoryLevel3;
 	}
 }
