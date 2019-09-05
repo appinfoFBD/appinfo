@@ -42,15 +42,15 @@ public class appInfoServiceImpl implements appInfoService {
 
 	@Override
 	public boolean appinfomodify(app_info app) {
-		if(appinfoMapper.appinfomodify(app)>0){
-			return true;
-		}
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public app_info findAppInfo(Integer id) {
-		return appinfoMapper.findAppId(id);
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 
 }
