@@ -8,22 +8,22 @@ import java.util.Date;
  *
  */
 public class dev_user {
-	private BigInteger id;
+	private Integer id;
 	private String devCode; // 开发者账号
 	private String devName; // 开发者名称
 	private String devPassword;// 开发者密码
 	private String devEmail; // 开发者电子邮箱
 	private String devInfo; // 开发者简介
-	private BigInteger createdBy;// 创建者
+	private Integer createdBy;// 创建者
 	private Date creationDate; // 创建时间
-	private BigInteger modifyBy; // 更新者
+	private Integer modifyBy; // 更新者
 	private Date modifyDate; // 更新时间
 
-	public BigInteger getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -67,11 +67,11 @@ public class dev_user {
 		this.devInfo = devInfo;
 	}
 
-	public BigInteger getCreatedBy() {
+	public Integer getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(BigInteger createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -83,11 +83,11 @@ public class dev_user {
 		this.creationDate = creationDate;
 	}
 
-	public BigInteger getModifyBy() {
+	public Integer getModifyBy() {
 		return modifyBy;
 	}
 
-	public void setModifyBy(BigInteger modifyBy) {
+	public void setModifyBy(Integer modifyBy) {
 		this.modifyBy = modifyBy;
 	}
 

@@ -22,6 +22,9 @@ public class categoryServiceImpl implements categoryService {
 
 	@Override
 	public List<app_category> selectCategory(Integer parentId) {
+		if(parentId==null){
+			return categoryMapper.selectCategory1();
+		}
 		return categoryMapper.selectCategory(parentId);
 	}
 

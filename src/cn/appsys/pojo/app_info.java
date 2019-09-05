@@ -4,34 +4,37 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class app_info {
-	private BigInteger id;
+	private Integer id;
 	private String softwareName; // 软件名称
 	private String APKName; // apk名称
 	private String supportROM;// 支持ROM
 	private String interfaceLanguage;// 界面语言
 	private Double softwareSize; // 软件大小
 	private Date updateDate; // 更新日期
-	private BigInteger devId; // 开发者id
+	private Integer devId; // 开发者id
 	private String appInfo; // 应用简介
-	private BigInteger status;// 状态
+	private Integer status;// 状态
 	private Date onSaleDate; // 上架时间
-	private BigInteger createdBy; // 创建者
+	private Date offSaleDate; // 下架时间
+	private Integer createdBy; // 创建者
 	private Date creationDate; // 创建时间
+	private Integer modifyBy; // 修改者
+	private Date modifyDate; // 修改時間
 	private String logoPicPath;
 	private String logoLocPath;
-	private BigInteger flatformId;
+	private Integer flatformId;
 	private String flatformName;
 	private String downloads;
-	private BigInteger versionId;
-	private BigInteger categoryLevel1;
-	private BigInteger categoryLevel2;
-	private BigInteger categoryLevel3;
+	private Integer versionId;
+	private Integer categoryLevel1;
+	private Integer categoryLevel2;
+	private Integer categoryLevel3;
 
-	public BigInteger getVersionId() {
+	public Integer getVersionId() {
 		return versionId;
 	}
 
-	public void setVersionId(BigInteger versionId) {
+	public void setVersionId(Integer versionId) {
 		this.versionId = versionId;
 	}
 
@@ -90,11 +93,11 @@ public class app_info {
 		this.versionNo = versionNo;
 	}
 
-	public BigInteger getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -146,11 +149,11 @@ public class app_info {
 		this.updateDate = updateDate;
 	}
 
-	public BigInteger getDevId() {
+	public Integer getDevId() {
 		return devId;
 	}
 
-	public void setDevId(BigInteger devId) {
+	public void setDevId(Integer devId) {
 		this.devId = devId;
 	}
 
@@ -162,11 +165,11 @@ public class app_info {
 		this.appInfo = appInfo;
 	}
 
-	public BigInteger getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(BigInteger status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -186,11 +189,11 @@ public class app_info {
 		this.downloads = downloads;
 	}
 
-	public BigInteger getCreatedBy() {
+	public Integer getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(BigInteger createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -218,35 +221,59 @@ public class app_info {
 		this.logoLocPath = logoLocPath;
 	}
 
-	public BigInteger getFlatformId() {
+	public Integer getFlatformId() {
 		return flatformId;
 	}
 
-	public void setFlatformId(BigInteger flatformId) {
+	public void setFlatformId(Integer flatformId) {
 		this.flatformId = flatformId;
 	}
 
-	public BigInteger getCategoryLevel1() {
+	public Integer getCategoryLevel1() {
 		return categoryLevel1;
 	}
 
-	public void setCategoryLevel1(BigInteger categoryLevel1) {
+	public void setCategoryLevel1(Integer categoryLevel1) {
 		this.categoryLevel1 = categoryLevel1;
 	}
 
-	public BigInteger getCategoryLevel2() {
+	public Integer getCategoryLevel2() {
 		return categoryLevel2;
 	}
 
-	public void setCategoryLevel2(BigInteger categoryLevel2) {
+	public void setCategoryLevel2(Integer categoryLevel2) {
 		this.categoryLevel2 = categoryLevel2;
 	}
 
-	public BigInteger getCategoryLevel3() {
+	public Integer getCategoryLevel3() {
 		return categoryLevel3;
 	}
 
-	public void setCategoryLevel3(BigInteger categoryLevel3) {
+	public void setCategoryLevel3(Integer categoryLevel3) {
 		this.categoryLevel3 = categoryLevel3;
+	}
+
+	public Integer getModifyBy() {
+		return modifyBy;
+	}
+
+	public void setModifyBy(Integer modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	public Date getOffSaleDate() {
+		return offSaleDate;
+	}
+
+	public void setOffSaleDate(Date offSaleDate) {
+		this.offSaleDate = offSaleDate;
 	}
 }

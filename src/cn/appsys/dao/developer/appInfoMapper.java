@@ -24,4 +24,8 @@ public interface appInfoMapper {
 	public int appAdd(app_info app);
 	//按添加查询
 	public app_info findApp(@Param("APKName")String APKName);
+	//按id查找app的信息
+	public app_info findAppId(@Param("id")Integer id);
+	//修改app信息
+	public int appinfomodify(app_info app);
 }

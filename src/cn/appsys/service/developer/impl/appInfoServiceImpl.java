@@ -40,4 +40,17 @@ public class appInfoServiceImpl implements appInfoService {
 		return appinfoMapper.findApp(PAKName);
 	}
 
+	@Override
+	public boolean appinfomodify(app_info app) {
+		if(appinfoMapper.appinfomodify(app)>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public app_info findAppInfo(Integer id) {
+		return appinfoMapper.findAppId(id);
+	}
+
 }

@@ -1,6 +1,7 @@
 package cn.appsys.controller.developer;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -188,5 +189,35 @@ public class appController {
 			status="noexist";
 		}
 		return"{\"APKName\":\""+status+"\"}";
+	}
+	//跳转到修改页面
+	@RequestMapping("/appinfomodify")
+	public ModelAndView appinfomodify(@RequestParam("id") Integer id){
+		//查询修改的信息添加到model中
+		app_info app=appInfoService.findAppInfo(id);
+		ModelAndView mav=new ModelAndView();
+	    if(app!=null){
+	    	mav.addObject("appInfo", app);
+	    	mav.setViewName("/developer/appinfomodify");
+	    }else{
+	    	mav.setViewName("/developer/appinfolist");
+	    }
+	    return mav;
+	}
+	//修改信息
+	@RequestMapping("/appinfomodifysave")
+	public String appinfomodifysave(app_info app,HttpSession session,@RequestParam(value="status",required=false) Integer status){
+		app.setModifyBy(((dev_user)session.getAttribute("devUser")).getId());
+		app.setModifyDate(new Date());
+		if(status!=null){
+			app.setStatus(status);
+		}
+		//更新
+		if(appInfoService.appinfomodify(app)){
+			return "redirect:/devApp/flatform";
+		}else{
+			return"/developer/appinfomodify";
+		}
+		
 	}
 }

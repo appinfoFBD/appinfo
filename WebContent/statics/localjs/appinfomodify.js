@@ -5,7 +5,6 @@ function  loadCategoryLevel(pid,cl,categoryLevel){
 		data:{pid:pid},//请求参数
 		dataType:"json",//ajax接口（请求url）返回的数据类型
 		success:function(data){//data：返回数据（json对象）
-			
 			$("#"+categoryLevel).html("");
 			var options = "<option value=\"\">--请选择--</option>";
 			for(var i = 0; i < data.length; i++){
@@ -43,7 +42,53 @@ function delfile(id){
 		}
 	});  
 }
-
+//非空判断
+$("form").submit(function(){
+	var softwareName=$("#softwareName").val();
+	var APKName=$("#APKName").val();
+	var supportROM=$("#supportROM").val();
+	var interfaceLanguage=$("#interfaceLanguage").val();
+	var softwareSize=$("#softwareSize").val();
+	var downloads=$("#downloads").val();
+	var flatformId=$("#flatformId").val();
+	var categoryLevel1=$("#categoryLevel1").val();
+	var categoryLevel2=$("#categoryLevel2").val();
+	var categoryLevel3=$("#categoryLevel3").val();
+	if(softwareName==""){
+		alert("软件名称不能为空");
+		return false;
+	}
+	if(APKName==""){
+		alert("APK名称不能为空");
+		return false;
+	}
+	if(supportROM==""){
+		alert("ROM不能为空");
+		return false;
+	}
+	if(interfaceLanguage==""){
+		alert("语言不能为空");
+		return false;
+	}
+	if(softwareSize==""){
+		alert("软件大小不能为空");
+		return false;
+	}
+	if(downloads==""){
+		alert("下载次数不能为空");
+		return false;
+	}
+	if(flatformId==""){
+		alert("请选择所属平台");
+		return false;
+	}
+	if(categoryLevel1==""){
+		alert("请选择一级菜单");
+		return false;
+	}
+	return true;
+	
+})
 $(function(){  
 	//动态加载所属平台列表
 	$.ajax({

@@ -21,4 +21,8 @@ public interface appInfoService {
 	public boolean appAdd(app_info app);
 	//验证PAK是否存在
 	public app_info findApp(String PAKName);
+	//修改操作
+	public boolean appinfomodify(app_info app);
+	//按id查找app信息
+	public app_info findAppInfo(Integer id);
 }
