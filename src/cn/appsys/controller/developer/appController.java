@@ -25,6 +25,7 @@ import com.alibaba.fastjson.JSON;
 
 import cn.appsys.pojo.app_category;
 import cn.appsys.pojo.app_info;
+import cn.appsys.pojo.app_version;
 import cn.appsys.pojo.data_dictionary;
 import cn.appsys.pojo.dev_user;
 import cn.appsys.tools.Pager;
@@ -42,6 +43,8 @@ public class appController {
 	// app信息
 	@Resource(name = "appInfoService")
 	private appInfoService appInfoService;
+	@Resource(name = "versionService")
+	private versionService versionService;
 
 	// app查询列表
 	@RequestMapping("/flatform")
@@ -126,7 +129,7 @@ public class appController {
 	public String appinfoaddsave(app_info app, HttpSession session, HttpServletRequest request,
 			@RequestParam(value = "a_logoPicPath", required = false) MultipartFile mult) {
 		String logPicPath = ""; // 保存到本地路径
-		String logLogPath="";   //服务器的路径
+		String logLogPath = ""; // 服务器的路径
 		if (!mult.isEmpty()) {
 			// 设置服务器路径
 			String path = request.getSession().getServletContext()
@@ -156,8 +159,8 @@ public class appController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				logPicPath = path.substring(path.lastIndexOf("/")+70)+File.separator+fileName;
-			    logLogPath=path+File.separator+fileName;
+				logPicPath = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
+				logLogPath = path + File.separator + fileName;
 			} else {
 				request.setAttribute("uploadFileError", "* 文件格式不正确");
 				return "/developer/appinfoadd";
@@ -175,49 +178,125 @@ public class appController {
 		return "/developer/appinfoadd";
 
 	}
-	//验证apk是否存在
+
+	// 验证apk是否存在
 	@RequestMapping("/apkexist.json")
 	@ResponseBody
-	public Object apkexist(@RequestParam("APKName")String APKName){
-		String status="";
-		app_info app=appInfoService.findApp(APKName);
-		if(APKName==null || APKName==""){
-			status="empty";
-		}else if(app!=null){
-			 status="exist";
-		}else{
-			status="noexist";
+	public Object apkexist(@RequestParam("APKName") String APKName) {
+		String status = "";
+		app_info app = appInfoService.findApp(APKName);
+		if (APKName == null || APKName == "") {
+			status = "empty";
+		} else if (app != null) {
+			status = "exist";
+		} else {
+			status = "noexist";
 		}
-		return"{\"APKName\":\""+status+"\"}";
+		return "{\"APKName\":\"" + status + "\"}";
 	}
-	//跳转到修改页面
+
+	// 跳转到修改页面
 	@RequestMapping("/appinfomodify")
-	public ModelAndView appinfomodify(@RequestParam("id") Integer id){
-		//查询修改的信息添加到model中
-		app_info app=appInfoService.findAppInfo(id);
-		ModelAndView mav=new ModelAndView();
-	    if(app!=null){
-	    	mav.addObject("appInfo", app);
-	    	mav.setViewName("/developer/appinfomodify");
-	    }else{
-	    	mav.setViewName("/developer/appinfolist");
-	    }
-	    return mav;
+	public ModelAndView appinfomodify(@RequestParam("id") Integer id) {
+		// 查询修改的信息添加到model中
+		app_info app = appInfoService.findAppInfo(id);
+		ModelAndView mav = new ModelAndView();
+		if (app != null) {
+			mav.addObject("appInfo", app);
+			mav.setViewName("/developer/appinfomodify");
+		} else {
+			mav.setViewName("/developer/appinfolist");
+		}
+		return mav;
 	}
-	//修改信息
+
+	// 修改信息
 	@RequestMapping("/appinfomodifysave")
-	public String appinfomodifysave(app_info app,HttpSession session,@RequestParam(value="status",required=false) Integer status){
-		app.setModifyBy(((dev_user)session.getAttribute("devUser")).getId());
+	public String appinfomodifysave(app_info app, HttpSession session,
+			@RequestParam(value = "status", required = false) Integer status) {
+		app.setModifyBy(((dev_user) session.getAttribute("devUser")).getId());
 		app.setModifyDate(new Date());
-		if(status!=null){
+		if (status != null) {
 			app.setStatus(status);
 		}
-		//更新
-		if(appInfoService.appinfomodify(app)){
+		// 更新
+		if (appInfoService.appinfomodify(app)) {
 			return "redirect:/devApp/flatform";
-		}else{
-			return"/developer/appinfomodify";
+		} else {
+			return "/developer/appinfomodify";
 		}
-		
+
+	}
+
+	// 跳转到新增版本页面
+	@RequestMapping("/appversionadd")
+	public ModelAndView appversionadd(@RequestParam("id") Integer id) {
+		ModelAndView mav = new ModelAndView();
+		// 查询app版本信息
+		app_info app = appInfoService.selectAppVersion(id);
+		mav.addObject("appVersionList", app.getVersionList()); // 保存id发布过的版本
+		mav.addObject("appVersion", app);
+		mav.setViewName("/developer/appversionadd");
+		return mav;
+	}
+
+	// 新增版本
+	@RequestMapping("/addversionsave")
+	public String addversionsave(@RequestParam("appId") Integer appId,
+			@RequestParam("a_downloadLink") MultipartFile part, HttpServletRequest request, app_version version,
+			HttpSession session) {
+		String downloadLink = ""; // 下载链接
+		String apkLocPath = ""; // 服务器路径
+		String apkFileName = ""; // 上传apk的名称
+		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "apkFiles");
+		if (!part.isEmpty()) {
+			// 获取文件名
+			String odlFileName = part.getOriginalFilename();
+			// 获取源文件名后缀
+			String suffix = FilenameUtils.getExtension(odlFileName);
+			// 定义上传文件的大小
+			int fileSize = 51200000;
+			if (part.getSize() > fileSize) {
+				request.setAttribute("fileUploadError", "* 文件大小限制500MB");
+				return "/developer/appversionadd";
+			} else if (suffix.equalsIgnoreCase("apk")) {
+				// 查询app的APK名称
+				app_info appInfo = appInfoService.findAPKName(appId);
+				// 文件名
+				String fileName = appInfo.getAPKName() + "-" + version.getVersionNo() + ".apk";
+				File file = new File(path, fileName);
+				if (!file.exists()) {
+					file.mkdirs();
+				}
+				// 保存
+				try {
+					part.transferTo(file);
+				} catch (Exception e) {
+					e.printStackTrace();
+					request.setAttribute("fileUploadError", "* 上传失败");
+					return "/developer/appversionadd";
+
+				}
+				// 服务器的路径
+				apkLocPath = path + File.separator + fileName;
+				// 上传的名称
+				apkFileName = fileName;
+				// 下载的路径
+				downloadLink = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
+			} else {
+				request.setAttribute("fileUploadError", "* 上传文件格式不正确");
+				return "/developer/appversionadd";
+			}
+		}
+		// 添加
+		version.setCreatedBy(((dev_user) session.getAttribute("devUser")).getId());
+		version.setCreationDate(new Date());
+		version.setDownloadLink(downloadLink);
+		version.setApkFileName(apkFileName);
+		version.setApkLocPath(apkLocPath);
+		if (versionService.insertVersion(version)) {
+			return "redirect:/devApp/flatform";
+		}
+		return "/developer/appversionadd";
 	}
 }

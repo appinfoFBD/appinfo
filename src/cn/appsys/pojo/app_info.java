@@ -2,6 +2,7 @@ package cn.appsys.pojo;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 public class app_info {
 	private Integer id;
@@ -29,7 +30,7 @@ public class app_info {
 	private Integer categoryLevel1;
 	private Integer categoryLevel2;
 	private Integer categoryLevel3;
-
+    private List<app_version> versionList; //app的版本集合
 	public Integer getVersionId() {
 		return versionId;
 	}
@@ -275,5 +276,13 @@ public class app_info {
 
 	public void setOffSaleDate(Date offSaleDate) {
 		this.offSaleDate = offSaleDate;
+	}
+
+	public List<app_version> getVersionList() {
+		return versionList;
+	}
+
+	public void setVersionList(List<app_version> versionList) {
+		this.versionList = versionList;
 	}
 }

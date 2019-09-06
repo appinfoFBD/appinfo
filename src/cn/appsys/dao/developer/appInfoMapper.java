@@ -2,6 +2,8 @@ package cn.appsys.dao.developer;
 
 import java.util.List;
 
+import javax.validation.constraints.Past;
+
 import org.apache.ibatis.annotations.Param;
 
 import cn.appsys.pojo.app_info;
@@ -23,9 +25,13 @@ public interface appInfoMapper {
 	//添加app信息
 	public int appAdd(app_info app);
 	//按添加查询
-	public app_info findApp(@Param("APKName")String APKName);
+	public app_info findApp(@Param("APKName")String APKName,@Param("id") Integer id);
 	//按id查找app的信息
 	public app_info findAppId(@Param("id")Integer id);
 	//修改app信息
 	public int appinfomodify(app_info app);
+	//查询app的版本
+	public app_info selectVersion(@Param("id")Integer id);
+	//更新版本id
+	public int updateVersionId(@Param("id")Integer id,@Param("versionId")Integer versionId);
 }

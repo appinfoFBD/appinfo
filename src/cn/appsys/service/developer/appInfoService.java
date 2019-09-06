@@ -25,4 +25,8 @@ public interface appInfoService {
 	public boolean appinfomodify(app_info app);
 	//按id查找app信息
 	public app_info findAppInfo(Integer id);
+	//查询app版本信息
+	public app_info selectAppVersion(int id);
+	//按id查找apk名称
+	public app_info findAPKName(Integer id);
 }

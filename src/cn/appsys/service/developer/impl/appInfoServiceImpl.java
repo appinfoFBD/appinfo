@@ -37,7 +37,7 @@ public class appInfoServiceImpl implements appInfoService {
 
 	@Override
 	public app_info findApp(String PAKName) {
-		return appinfoMapper.findApp(PAKName);
+		return appinfoMapper.findApp(PAKName,null);
 	}
 
 	@Override
@@ -52,5 +52,16 @@ public class appInfoServiceImpl implements appInfoService {
 	public app_info findAppInfo(Integer id) {
 		return appinfoMapper.findAppId(id);
 	}
+
+	@Override
+	public app_info selectAppVersion(int id) {
+		return appinfoMapper.selectVersion(id);
+	}
+
+	@Override
+	public app_info findAPKName(Integer id) {
+		return appinfoMapper.findApp(null, id);
+	}
+	
 
 }

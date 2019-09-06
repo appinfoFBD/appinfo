@@ -3,33 +3,36 @@ package cn.appsys.pojo;
 import java.math.BigInteger;
 import java.util.Date;
 
-
 public class app_version {
-	private BigInteger id;
-	private BigInteger appId;
+	private Integer id;
+	private Integer appId;
+	private String appName;
 	private String versionNo; // 版本号
 	private String versionInfo; // 版本介绍
 	private BigInteger publishStatus;// 发布状态
+	private String publishStatusName; // 发布状态名称
 	private String downloadLink; // 下载链接
 	private Double versionSize; // 版本大小
-	private BigInteger createdBy;// 创建者
+	private Integer createdBy;// 创建者
 	private Date creationDate; // 创建时间
 	private BigInteger modifyBy; // 更新者
 	private Date modifyDate; // 更新时间
+	private String apkFileName;
+	private String apkLocPath;
 
-	public BigInteger getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public BigInteger getAppId() {
+	public Integer getAppId() {
 		return appId;
 	}
 
-	public void setAppId(BigInteger appId) {
+	public void setAppId(Integer appId) {
 		this.appId = appId;
 	}
 
@@ -73,11 +76,11 @@ public class app_version {
 		this.versionSize = versionSize;
 	}
 
-	public BigInteger getCreatedBy() {
+	public Integer getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(BigInteger createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -103,5 +106,37 @@ public class app_version {
 
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+
+	public String getAppName() {
+		return appName;
+	}
+
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+
+	public String getPublishStatusName() {
+		return publishStatusName;
+	}
+
+	public void setPublishStatusName(String publishStatusName) {
+		this.publishStatusName = publishStatusName;
+	}
+
+	public String getApkFileName() {
+		return apkFileName;
+	}
+
+	public void setApkFileName(String apkFileName) {
+		this.apkFileName = apkFileName;
+	}
+
+	public String getApkLocPath() {
+		return apkLocPath;
+	}
+
+	public void setApkLocPath(String apkLocPath) {
+		this.apkLocPath = apkLocPath;
 	}
 }

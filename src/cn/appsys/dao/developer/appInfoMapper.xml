@@ -58,8 +58,15 @@ PUBLIC "mybatis-3-mapper"
 		value(#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{downloads},#{flatformId},#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{status},#{appInfo},#{logoPicPath},#{logoLocPath},#{createdBy},#{creationDate})
 	</insert>
 	<select id="findApp" resultType="app_info">
-		select * from app_info where
-		APKName=#{APKName}
+		select * from app_info
+		<where>
+		   <if test="APKName!=null">
+		    and APKName=#{APKName}
+		    </if>
+		    <if test="id!=null">
+		     and id=#{id}
+		    </if>
+		</where>
 	</select>
 	<select id="findAppId" resultType="app_info">
 		select a.*,(SELECT d.valueName FROM data_dictionary d where d.typeCode='APP_STATUS' AND d.valueId=a.`status`) AS statusName
@@ -89,5 +96,27 @@ PUBLIC "mybatis-3-mapper"
 			<if test="categoryLevel2!=null">categoryLevel2=#{categoryLevel2},</if>
 		</set>
 		where id=#{id}
+	</update>
+	<select id="selectVersion" resultMap="appVersionList">
+	  select a.id,v.*,(SELECT i.softwareName FROM app_info i where v.appId=i.id) AS appName,
+     (SELECT d.valueName FROM data_dictionary d where v.publishStatus=d.valueId AND d.typeCode='PUBLISH_STATUS') AS publishStatusName
+     from app_info a,app_version v where a.id=v.appId and a.id=#{id}
+	</select>
+	<resultMap type="app_info" id="appVersionList">
+	   <result property="id" column="id"/>
+	   <collection property="versionList" ofType="app_version">
+	       <id property="id" column="id1"/>
+	       <result property="appId" column="appId"/>
+	       <result property="appName" column="appName"/>
+	       <result property="versionNo" column="versionNo"/>
+	       <result property="publishStatusName" column="publishStatusName"/>
+	       <result property="versionSize" column="versionSize"/>
+	       <result property="downloadLink" column="downloadLink"/>
+	       <result property="modifyDate" column="modifyDate"/>
+	       <result property="apkFileName" column="apkFileName"/>
+	   </collection>
+	</resultMap>
+	<update id="updateVersionId">
+	  UPDATE app_info set versionId=#{versionId} WHERE id=#{id}
 	</update>
 </mapper>
