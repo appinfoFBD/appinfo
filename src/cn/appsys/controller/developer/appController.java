@@ -14,7 +14,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -298,5 +300,56 @@ public class appController {
 			return "redirect:/devApp/flatform";
 		}
 		return "/developer/appversionadd";
+	}
+
+	// 跳转到修改版本页面并查询版本信息
+	@RequestMapping("/appversionmodify")
+	public String appversionmodify(@RequestParam("vid") Integer versionid,
+			@RequestParam("aid") Integer appinfoid, Model model) {
+		// 查询所有的版本信息
+		app_info app = appInfoService.selectAppVersion(appinfoid);
+		model.addAttribute("appVersionList", app.getVersionList()); // 保存id发布过的版本
+		// 查询app版本信息
+		app_version version = versionService.selectVersion(versionid, appinfoid);
+		model.addAttribute("appVersion", version);
+		return "/developer/appversionmodify";
+
+	}
+	//修改版本
+	/**
+	 * @param version
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/appversionmodifysave")
+	public String appversionmodifysave(app_version version,HttpSession session,HttpServletRequest request){
+		version.setModifyBy(((dev_user)session.getAttribute("devUser")).getId());
+		version.setModifyDate(new Date());
+		if(versionService.updateVersion(version)){
+			return "redirect:/devApp/flatform";
+		}else{
+			request.setAttribute("fileUploadError","* 修改失败");
+			return "/developer/appversionmodify";
+		}
+		
+	}
+	//查看app基础信息
+	@RequestMapping("/appview/{id}")
+	public String appview(@PathVariable Integer id,Model model){
+		//查询app的基础信息
+		app_info appInfo=appInfoService.findAppInfo(id);
+	    if(appInfo.getVersionId()!=null){
+	    	//查询app的历史版本
+		    app_info appVersion=appInfoService.selectAppVersion(id);
+	    	model.addAttribute("appVersionList",appVersion.getVersionList());
+	    }
+	    
+	    model.addAttribute("appInfo",appInfo);
+	    return "/developer/appinfoview";
+	}
+	//返回查询页面
+	@RequestMapping("/list")
+	public String list(){
+		return "redirect:/devApp/flatform";
 	}
 }

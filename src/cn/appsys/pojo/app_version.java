@@ -15,7 +15,7 @@ public class app_version {
 	private Double versionSize; // 版本大小
 	private Integer createdBy;// 创建者
 	private Date creationDate; // 创建时间
-	private BigInteger modifyBy; // 更新者
+	private Integer modifyBy; // 更新者
 	private Date modifyDate; // 更新时间
 	private String apkFileName;
 	private String apkLocPath;
@@ -92,11 +92,11 @@ public class app_version {
 		this.creationDate = creationDate;
 	}
 
-	public BigInteger getModifyBy() {
+	public Integer getModifyBy() {
 		return modifyBy;
 	}
 
-	public void setModifyBy(BigInteger modifyBy) {
+	public void setModifyBy(Integer modifyBy) {
 		this.modifyBy = modifyBy;
 	}
 

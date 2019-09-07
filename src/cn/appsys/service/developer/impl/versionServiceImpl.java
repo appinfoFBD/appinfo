@@ -22,5 +22,16 @@ public class versionServiceImpl implements versionService {
 		}
 		return false;
 	}
+	@Override
+	public app_version selectVersion(Integer versionId, Integer appInfoId) {
+		return versionMapper.selectVersion(versionId, appInfoId);
+	}
+	public boolean updateVersion(app_version version) {
+		if(versionMapper.updateVersion(version)>0){
+			return true;
+		}
+		return false;
+	}
+
 
 }

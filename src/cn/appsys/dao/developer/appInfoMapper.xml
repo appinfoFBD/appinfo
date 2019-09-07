@@ -4,7 +4,7 @@ PUBLIC "mybatis-3-mapper"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.appsys.dao.developer.appInfoMapper">
 	<select id="selectAppInfo" resultType="app_info">
-		select a.id,a.softwareName,a.APKName,a.softwareSize,a.status,
+		select a.id,a.versionId,a.softwareName,a.APKName,a.softwareSize,a.status,
 		(SELECT
 		d.valueName
 		FROM data_dictionary d where a.flatformId=d.valueId AND
