@@ -26,7 +26,8 @@ PUBLIC "mybatis-3-mapper"
 		</set>
 		where id=#{id}
 	</update>
-	<select id="versionList" resultType="app_version">
+	<select id="
+" resultType="app_version">
 		SELECT v.*,(SELECT
 		a.softwareName FROM app_info a WHERE a.id=v.appId) AS appName from
 		app_version v WHERE v.appId=#{appId}
