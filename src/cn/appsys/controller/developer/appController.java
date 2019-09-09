@@ -37,18 +37,18 @@ import cn.appsys.service.developer.*;
 @RequestMapping("/devApp")
 public class appController {
 	@Resource(name = "categoryService")
-	// app²Ëµ¥·ÖÀà
+	// appï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½
 	private categoryService categoryService;
 	// app×´Ì¬
 	@Resource(name = "dictionaryService")
 	private dictionaryService dictionaryService;
-	// appÐÅÏ¢
+	// appï¿½ï¿½Ï¢
 	@Resource(name = "appInfoService")
 	private appInfoService appInfoService;
 	@Resource(name = "versionService")
 	private versionService versionService;
 
-	// app²éÑ¯ÁÐ±í
+	// appï¿½ï¿½Ñ¯ï¿½Ð±ï¿½
 	@RequestMapping("/flatform")
 	public ModelAndView appList(@RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
 			@RequestParam(value = "queryStatus", required = false) Integer queryStatus,
@@ -61,14 +61,14 @@ public class appController {
 		if ("" == querySoftwareName) {
 			querySoftwareName = null;
 		}
-		// ²éÑ¯Ò»¼¶²Ëµ¥
+		// ï¿½ï¿½Ñ¯Ò»ï¿½ï¿½ï¿½Ëµï¿½
 		List<app_category> categoryLevel1List = categoryService.selectCategory1();
-		// ²éÑ¯app×´Ì¬
+		// ï¿½ï¿½Ñ¯app×´Ì¬
 		List<data_dictionary> statusList = dictionaryService.selectAppstatus();
-		// ²éÑ¯appËùÊôÆ½Ì¨
+		// ï¿½ï¿½Ñ¯appï¿½ï¿½ï¿½ï¿½Æ½Ì¨
 		List<data_dictionary> flatFormList = dictionaryService.selectApp_flatform();
-		// ·ÖÒ³²éÑ¯appÐÅÏ¢
-		// ²éÕÒ×ÜÊý
+		// ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯appï¿½ï¿½Ï¢
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int count = appInfoService.count(querySoftwareName, queryStatus, queryFlatformId, queryCategoryLevel1,
 				queryCategoryLevel2, queryCategoryLevel3);
 		int currentPage = 1;
@@ -85,13 +85,13 @@ public class appController {
 		List<app_info> appInfoList = appInfoService.selectAppInfo(querySoftwareName, queryStatus, queryFlatformId,
 				queryCategoryLevel1, queryCategoryLevel2, queryCategoryLevel3,
 				(currentPage - 1) * pager.getRowPerPage(), pager.getRowPerPage());
-		// ±£´æÊý¾Ý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("categoryLevel1List", categoryLevel1List); // ±£´æappÒ»¼¶²Ëµ¥
-		mav.addObject("statusList", statusList); // ±£´æapp×´Ì¬
-		mav.addObject("flatFormList", flatFormList); // ±£´æappËùÊôÆ½Ì¨
-		mav.addObject("pages", pager); // ·ÖÒ³Êý¾Ý
-		mav.addObject("appInfoList", appInfoList); // ÏÔÊ¾Êý¾Ý
+		mav.addObject("categoryLevel1List", categoryLevel1List); // ï¿½ï¿½ï¿½ï¿½appÒ»ï¿½ï¿½ï¿½Ëµï¿½
+		mav.addObject("statusList", statusList); // ï¿½ï¿½ï¿½ï¿½app×´Ì¬
+		mav.addObject("flatFormList", flatFormList); // ï¿½ï¿½ï¿½ï¿½appï¿½ï¿½ï¿½ï¿½Æ½Ì¨
+		mav.addObject("pages", pager); // ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
+		mav.addObject("appInfoList", appInfoList); // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 		mav.setViewName("/developer/appinfolist");
 		return mav;
 	}
@@ -103,13 +103,13 @@ public class appController {
 		return categoryList;
 	}
 
-	// Ìø×ªµ½ÐÂÔöÁÐ±í
+	// ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	@RequestMapping("/appinfoadd")
 	public String appinfoad(@ModelAttribute app_info app) {
 		return "/developer/appinfoadd";
 	}
 
-	// »ñÈ¡ËùÊôÆ½Ì¨
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Æ½Ì¨
 	@RequestMapping("/datadictionarylist.json")
 	@ResponseBody
 	public Object dictionaryList() {
@@ -117,8 +117,8 @@ public class appController {
 		return dictionaryList;
 	}
 
-	// »ñÈ¡Ò»¼¶²Ëµ¥
-	// »ñÈ¡ËùÊôÆ½Ì¨
+	// ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½Ëµï¿½
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Æ½Ì¨
 	@RequestMapping("/categorylevel.json")
 	@ResponseBody
 	public Object categorylevellist() {
@@ -126,36 +126,36 @@ public class appController {
 		return categoryList;
 	}
 
-	// Ìí¼ÓÐÅÏ¢ºÍÊµÏÖÎÄ¼þÉÏ´«
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Êµï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½
 	@RequestMapping("/appinfoaddsave")
 	public String appinfoaddsave(app_info app, HttpSession session, HttpServletRequest request,
 			@RequestParam(value = "a_logoPicPath", required = false) MultipartFile mult) {
-		String logPicPath = ""; // ±£´æµ½±¾µØÂ·¾¶
-		String logLogPath = ""; // ·þÎñÆ÷µÄÂ·¾¶
+		String logPicPath = ""; // ï¿½ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+		String logLogPath = ""; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 		if (!mult.isEmpty()) {
-			// ÉèÖÃ·þÎñÆ÷Â·¾¶
+			// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 			String path = request.getSession().getServletContext()
 					.getRealPath("statics" + File.separator + "uploadfiles");
-			// Ô´ÎÄ¼þÃû
+			// Ô´ï¿½Ä¼ï¿½ï¿½ï¿½
 			String oldFileName = mult.getOriginalFilename();
-			// »ñÈ¡ºó×º
+			// ï¿½ï¿½È¡ï¿½ï¿½×º
 			String suffix = FilenameUtils.getExtension(oldFileName);
-			// ÉèÖÃÎÄ¼þ´óÐ¡
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡
 			int fileSize = 5000000;
-			// ÉÏ´«ÎÄ¼þ²»µÃ³¬¹ý500kb
+			// ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½500kb
 			if (mult.getSize() > fileSize) {
-				request.setAttribute("uploadFileError", "* ÉÏ´«ÎÄ¼þ´óÐ¡²»µÃ³¬¹ý500kb");
+				request.setAttribute("uploadFileError", "* ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½500kb");
 				return "/developer/appinfoadd";
 			} else if (suffix.equalsIgnoreCase("jpg") || suffix.equalsIgnoreCase("jpeg")
-					|| suffix.equalsIgnoreCase("png")) { // ÎÄ¼þ¸ñÊ½±ØÐëÊÇ
-															// jpg,jpeg,png¸ñÊ½
-				// ÐÂµÄÍ¼Æ¬Ãû³Æ
+					|| suffix.equalsIgnoreCase("png")) { // ï¿½Ä¼ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+															// jpg,jpeg,pngï¿½ï¿½Ê½
+				// ï¿½Âµï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
 				String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + oldFileName;
 				File file = new File(path, fileName);
 				if (!file.exists()) {
 					file.mkdirs();
 				}
-				// ±£´æµ½·þÎñÆ÷
+				// ï¿½ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				try {
 					mult.transferTo(file);
 				} catch (Exception e) {
@@ -164,12 +164,12 @@ public class appController {
 				logPicPath = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
 				logLogPath = path + File.separator + fileName;
 			} else {
-				request.setAttribute("uploadFileError", "* ÎÄ¼þ¸ñÊ½²»ÕýÈ·");
+				request.setAttribute("uploadFileError", "* ï¿½Ä¼ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½È·");
 				return "/developer/appinfoadd";
 			}
 
 		}
-		// ±£´æµ½Êý¾Ý¿â
+		// ï¿½ï¿½ï¿½æµ½ï¿½ï¿½ï¿½Ý¿ï¿½
 		app.setCreatedBy(((dev_user) session.getAttribute("devUser")).getId());
 		app.setCreationDate(new Date());
 		app.setLogoPicPath(logPicPath);
@@ -181,7 +181,7 @@ public class appController {
 
 	}
 
-	// ÑéÖ¤apkÊÇ·ñ´æÔÚ
+	// ï¿½ï¿½Ö¤apkï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/apkexist.json")
 	@ResponseBody
 	public Object apkexist(@RequestParam("APKName") String APKName) {
@@ -197,10 +197,10 @@ public class appController {
 		return "{\"APKName\":\"" + status + "\"}";
 	}
 
-	// Ìø×ªµ½ÐÞ¸ÄÒ³Ãæ
+	// ï¿½ï¿½×ªï¿½ï¿½ï¿½Þ¸ï¿½Ò³ï¿½ï¿½
 	@RequestMapping("/appinfomodify")
 	public ModelAndView appinfomodify(@RequestParam("id") Integer id) {
-		// ²éÑ¯ÐÞ¸ÄµÄÐÅÏ¢Ìí¼Óµ½modelÖÐ
+		// ï¿½ï¿½Ñ¯ï¿½Þ¸Äµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Óµï¿½modelï¿½ï¿½
 		app_info app = appInfoService.findAppInfo(id);
 		ModelAndView mav = new ModelAndView();
 		if (app != null) {
@@ -212,7 +212,7 @@ public class appController {
 		return mav;
 	}
 
-	// ÐÞ¸ÄÐÅÏ¢
+	// ï¿½Þ¸ï¿½ï¿½ï¿½Ï¢
 	@RequestMapping("/appinfomodifysave")
 	public String appinfomodifysave(app_info app, HttpSession session,
 			@RequestParam(value = "status", required = false) Integer status) {
@@ -221,7 +221,7 @@ public class appController {
 		if (status != null) {
 			app.setStatus(status);
 		}
-		// ¸üÐÂ
+		// ï¿½ï¿½ï¿½ï¿½
 		if (appInfoService.appinfomodify(app)) {
 			return "redirect:/devApp/flatform";
 		} else {
@@ -230,13 +230,13 @@ public class appController {
 
 	}
 
-	// Ìø×ªµ½ÐÂÔö°æ±¾Ò³Ãæ
+	// ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾Ò³ï¿½ï¿½
 	@RequestMapping("/appversionadd")
 	public ModelAndView appversionadd(@RequestParam("id") Integer id) {
 		ModelAndView mav = new ModelAndView();
 		app_info app = appInfoService.findAppInfo(id);
 		if (app.getVersionId() != null) {
-			// Èç¹ûappÓÐ·¢²¼¹ý°æ±¾¾Í²éÑ¯ËûËùÓÐµÄ°æ±¾
+			// ï¿½ï¿½ï¿½appï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½Í²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ°æ±¾
 			List<app_version> versionList = versionService.versionList(id);
 			mav.addObject("appVersionList", versionList);
 		}
@@ -245,56 +245,56 @@ public class appController {
 		return mav;
 	}
 
-	// ÐÂÔö°æ±¾
+	// ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾
 	@RequestMapping("/addversionsave")
 	public String addversionsave(@RequestParam("appId") Integer appId,
 			@RequestParam("a_downloadLink") MultipartFile part, HttpServletRequest request, app_version version,
 			HttpSession session) {
-		String downloadLink = ""; // ÏÂÔØÁ´½Ó
-		String apkLocPath = ""; // ·þÎñÆ÷Â·¾¶
-		String apkFileName = ""; // ÉÏ´«apkµÄÃû³Æ
+		String downloadLink = ""; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String apkLocPath = ""; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+		String apkFileName = ""; // ï¿½Ï´ï¿½apkï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "apkFiles");
 		if (!part.isEmpty()) {
-			// »ñÈ¡ÎÄ¼þÃû
+			// ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½
 			String odlFileName = part.getOriginalFilename();
-			// »ñÈ¡Ô´ÎÄ¼þÃûºó×º
+			// ï¿½ï¿½È¡Ô´ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½×º
 			String suffix = FilenameUtils.getExtension(odlFileName);
-			// ¶¨ÒåÉÏ´«ÎÄ¼þµÄ´óÐ¡
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½Ä´ï¿½Ð¡
 			int fileSize = 51200000;
 			if (part.getSize() > fileSize) {
-				request.setAttribute("fileUploadError", "* ÎÄ¼þ´óÐ¡ÏÞÖÆ500MB");
+				request.setAttribute("fileUploadError", "* ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½500MB");
 				return "/developer/appversionadd";
 			} else if (suffix.equalsIgnoreCase("apk")) {
-				// ²éÑ¯appµÄAPKÃû³Æ
+				// ï¿½ï¿½Ñ¯appï¿½ï¿½APKï¿½ï¿½ï¿½ï¿½
 				System.out.println(appId);
 				app_info appInfo = appInfoService.findAPKName(appId);
-				// ÎÄ¼þÃû
+				// ï¿½Ä¼ï¿½ï¿½ï¿½
 				String fileName = appInfo.getAPKName() + "-" + version.getVersionNo() + ".apk";
 				File file = new File(path, fileName);
 				if (!file.exists()) {
 					file.mkdirs();
 				}
-				// ±£´æ
+				// ï¿½ï¿½ï¿½ï¿½
 				try {
 					part.transferTo(file);
 				} catch (Exception e) {
 					e.printStackTrace();
-					request.setAttribute("fileUploadError", "* ÉÏ´«Ê§°Ü");
+					request.setAttribute("fileUploadError", "* ï¿½Ï´ï¿½Ê§ï¿½ï¿½");
 					return "/developer/appversionadd";
 
 				}
-				// ·þÎñÆ÷µÄÂ·¾¶
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 				apkLocPath = path + File.separator + fileName;
-				// ÉÏ´«µÄÃû³Æ
+				// ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				apkFileName = fileName;
-				// ÏÂÔØµÄÂ·¾¶
+				// ï¿½ï¿½ï¿½Øµï¿½Â·ï¿½ï¿½
 				downloadLink = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
 			} else {
-				request.setAttribute("fileUploadError", "* ÉÏ´«ÎÄ¼þ¸ñÊ½²»ÕýÈ·");
+				request.setAttribute("fileUploadError", "* ï¿½Ï´ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½È·");
 				return "/developer/appversionadd";
 			}
 		}
-		// Ìí¼Ó
+		// ï¿½ï¿½ï¿½
 		version.setCreatedBy(((dev_user) session.getAttribute("devUser")).getId());
 		version.setCreationDate(new Date());
 		version.setDownloadLink(downloadLink);
@@ -306,21 +306,21 @@ public class appController {
 		return "/developer/appversionadd";
 	}
 
-	// Ìø×ªµ½ÐÞ¸Ä°æ±¾Ò³Ãæ²¢²éÑ¯°æ±¾ÐÅÏ¢
+	// ï¿½ï¿½×ªï¿½ï¿½ï¿½Þ¸Ä°æ±¾Ò³ï¿½æ²¢ï¿½ï¿½Ñ¯ï¿½æ±¾ï¿½ï¿½Ï¢
 	@RequestMapping("/appversionmodify")
 	public String appversionmodify(@RequestParam("vid") Integer versionid, @RequestParam("aid") Integer appinfoid,
 			Model model) {
-		// ²éÑ¯ËùÓÐµÄ°æ±¾ÐÅÏ¢
+		// ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ÐµÄ°æ±¾ï¿½ï¿½Ï¢
 		app_info app = appInfoService.selectAppVersion(appinfoid);
-		model.addAttribute("appVersionList", app.getVersionList()); // ±£´æid·¢²¼¹ýµÄ°æ±¾
-		// ²éÑ¯app°æ±¾ÐÅÏ¢
+		model.addAttribute("appVersionList", app.getVersionList()); // ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä°æ±¾
+		// ï¿½ï¿½Ñ¯appï¿½æ±¾ï¿½ï¿½Ï¢
 		app_version version = versionService.selectVersion(versionid, appinfoid);
 		model.addAttribute("appVersion", version);
 		return "/developer/appversionmodify";
 
 	}
 
-	// ÐÞ¸Ä°æ±¾
+	// ï¿½Þ¸Ä°æ±¾
 	/**
 	 * @param version
 	 * @param session
@@ -333,19 +333,19 @@ public class appController {
 		if (versionService.updateVersion(version)) {
 			return "redirect:/devApp/flatform";
 		} else {
-			request.setAttribute("fileUploadError", "* ÐÞ¸ÄÊ§°Ü");
+			request.setAttribute("fileUploadError", "* ï¿½Þ¸ï¿½Ê§ï¿½ï¿½");
 			return "/developer/appversionmodify";
 		}
 
 	}
 
-	// ²é¿´app»ù´¡ÐÅÏ¢
+	// ï¿½é¿´appï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	@RequestMapping("/appview/{id}")
 	public String appview(@PathVariable Integer id, Model model) {
-		// ²éÑ¯appµÄ»ù´¡ÐÅÏ¢
+		// ï¿½ï¿½Ñ¯appï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		app_info appInfo = appInfoService.findAppInfo(id);
 		if (appInfo.getVersionId() != null) {
-			// ²éÑ¯appµÄÀúÊ·°æ±¾
+			// ï¿½ï¿½Ñ¯appï¿½ï¿½ï¿½ï¿½Ê·ï¿½æ±¾
 			List<app_version> appVersionList = versionService.versionList(id);
 			model.addAttribute("appVersionList", appVersionList);
 		}
@@ -353,7 +353,7 @@ public class appController {
 		return "/developer/appinfoview";
 	}
 
-	// ·µ»Ø²éÑ¯Ò³Ãæ
+	// ï¿½ï¿½ï¿½Ø²ï¿½Ñ¯Ò³ï¿½ï¿½
 	@RequestMapping("/list")
 	public String list() {
 		return "redirect:/devApp/flatform";
