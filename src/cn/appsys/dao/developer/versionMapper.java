@@ -1,5 +1,7 @@
 package cn.appsys.dao.developer;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import cn.appsys.pojo.app_version;
@@ -15,4 +17,6 @@ public interface versionMapper {
 	public app_version selectVersion(@Param("versionId") Integer versionId, @Param("appInfoId") Integer appInfoId);
 	//修改版本
 	public int updateVersion(app_version version);
+	//查询appId的所有版本
+	public List<app_version> versionList(@Param("appId") Integer appId);
 }

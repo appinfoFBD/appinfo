@@ -234,9 +234,12 @@ public class appController {
 	@RequestMapping("/appversionadd")
 	public ModelAndView appversionadd(@RequestParam("id") Integer id) {
 		ModelAndView mav = new ModelAndView();
-		// 查询app版本信息
-		app_info app = appInfoService.selectAppVersion(id);
-		mav.addObject("appVersionList", app.getVersionList()); // 保存id发布过的版本
+		app_info app = appInfoService.findAppInfo(id);
+		if (app.getVersionId() != null) {
+			// 如果app有发布过版本就查询他所有的版本
+			List<app_version> versionList = versionService.versionList(id);
+			mav.addObject("appVersionList", versionList);
+		}
 		mav.addObject("appVersion", app);
 		mav.setViewName("/developer/appversionadd");
 		return mav;
@@ -263,6 +266,7 @@ public class appController {
 				return "/developer/appversionadd";
 			} else if (suffix.equalsIgnoreCase("apk")) {
 				// 查询app的APK名称
+				System.out.println(appId);
 				app_info appInfo = appInfoService.findAPKName(appId);
 				// 文件名
 				String fileName = appInfo.getAPKName() + "-" + version.getVersionNo() + ".apk";
@@ -304,8 +308,8 @@ public class appController {
 
 	// 跳转到修改版本页面并查询版本信息
 	@RequestMapping("/appversionmodify")
-	public String appversionmodify(@RequestParam("vid") Integer versionid,
-			@RequestParam("aid") Integer appinfoid, Model model) {
+	public String appversionmodify(@RequestParam("vid") Integer versionid, @RequestParam("aid") Integer appinfoid,
+			Model model) {
 		// 查询所有的版本信息
 		app_info app = appInfoService.selectAppVersion(appinfoid);
 		model.addAttribute("appVersionList", app.getVersionList()); // 保存id发布过的版本
@@ -315,41 +319,43 @@ public class appController {
 		return "/developer/appversionmodify";
 
 	}
-	//修改版本
+
+	// 修改版本
 	/**
 	 * @param version
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/appversionmodifysave")
-	public String appversionmodifysave(app_version version,HttpSession session,HttpServletRequest request){
-		version.setModifyBy(((dev_user)session.getAttribute("devUser")).getId());
+	public String appversionmodifysave(app_version version, HttpSession session, HttpServletRequest request) {
+		version.setModifyBy(((dev_user) session.getAttribute("devUser")).getId());
 		version.setModifyDate(new Date());
-		if(versionService.updateVersion(version)){
+		if (versionService.updateVersion(version)) {
 			return "redirect:/devApp/flatform";
-		}else{
-			request.setAttribute("fileUploadError","* 修改失败");
+		} else {
+			request.setAttribute("fileUploadError", "* 修改失败");
 			return "/developer/appversionmodify";
 		}
-		
+
 	}
-	//查看app基础信息
+
+	// 查看app基础信息
 	@RequestMapping("/appview/{id}")
-	public String appview(@PathVariable Integer id,Model model){
-		//查询app的基础信息
-		app_info appInfo=appInfoService.findAppInfo(id);
-	    if(appInfo.getVersionId()!=null){
-	    	//查询app的历史版本
-		    app_info appVersion=appInfoService.selectAppVersion(id);
-	    	model.addAttribute("appVersionList",appVersion.getVersionList());
-	    }
-	    
-	    model.addAttribute("appInfo",appInfo);
-	    return "/developer/appinfoview";
+	public String appview(@PathVariable Integer id, Model model) {
+		// 查询app的基础信息
+		app_info appInfo = appInfoService.findAppInfo(id);
+		if (appInfo.getVersionId() != null) {
+			// 查询app的历史版本
+			List<app_version> appVersionList = versionService.versionList(id);
+			model.addAttribute("appVersionList", appVersionList);
+		}
+		model.addAttribute("appInfo", appInfo);
+		return "/developer/appinfoview";
 	}
-	//返回查询页面
+
+	// 返回查询页面
 	@RequestMapping("/list")
-	public String list(){
+	public String list() {
 		return "redirect:/devApp/flatform";
 	}
 }

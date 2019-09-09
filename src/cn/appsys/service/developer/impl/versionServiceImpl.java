@@ -1,5 +1,7 @@
 package cn.appsys.service.developer.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,10 @@ public class versionServiceImpl implements versionService {
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public List<app_version> versionList(Integer appId) {
+		return versionMapper.versionList(appId);
 	}
 
 
