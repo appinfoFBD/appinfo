@@ -17,6 +17,7 @@ import cn.appsys.service.backend.backUserService;
 public class backUserController {
 	@Autowired
 	private backUserService backuserService;
+	
      //璺宠浆鍒板悗鍙扮櫥褰曢〉闈�
 	@RequestMapping("/login")
 	public String login(){
