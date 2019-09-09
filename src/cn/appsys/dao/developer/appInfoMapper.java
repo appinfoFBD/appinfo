@@ -34,4 +34,6 @@ public interface appInfoMapper {
 	public app_info selectVersion(@Param("id")Integer id);
 	//更新版本id
 	public int updateVersionId(@Param("id")Integer id,@Param("versionId")Integer versionId);
+	//删除app信息
+	public int delectApp(@Param("id")Integer id);
 }

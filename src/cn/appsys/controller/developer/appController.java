@@ -3,7 +3,9 @@ package cn.appsys.controller.developer;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,18 +39,18 @@ import cn.appsys.service.developer.*;
 @RequestMapping("/devApp")
 public class appController {
 	@Resource(name = "categoryService")
-	// app�˵�����
+	// app锟剿碉拷锟斤拷锟斤拷
 	private categoryService categoryService;
-	// app״̬
+	// app状态
 	@Resource(name = "dictionaryService")
 	private dictionaryService dictionaryService;
-	// app��Ϣ
+	// app锟斤拷息
 	@Resource(name = "appInfoService")
 	private appInfoService appInfoService;
 	@Resource(name = "versionService")
 	private versionService versionService;
 
-	// app��ѯ�б�
+	// app锟斤拷询锟叫憋拷
 	@RequestMapping("/flatform")
 	public ModelAndView appList(@RequestParam(value = "querySoftwareName", required = false) String querySoftwareName,
 			@RequestParam(value = "queryStatus", required = false) Integer queryStatus,
@@ -61,14 +63,14 @@ public class appController {
 		if ("" == querySoftwareName) {
 			querySoftwareName = null;
 		}
-		// ��ѯһ���˵�
+		// 锟斤拷询一锟斤拷锟剿碉拷
 		List<app_category> categoryLevel1List = categoryService.selectCategory1();
-		// ��ѯapp״̬
+		// 锟斤拷询app状态
 		List<data_dictionary> statusList = dictionaryService.selectAppstatus();
-		// ��ѯapp����ƽ̨
+		// 锟斤拷询app锟斤拷锟斤拷平台
 		List<data_dictionary> flatFormList = dictionaryService.selectApp_flatform();
-		// ��ҳ��ѯapp��Ϣ
-		// ��������
+		// 锟斤拷页锟斤拷询app锟斤拷息
+		// 锟斤拷锟斤拷锟斤拷锟斤拷
 		int count = appInfoService.count(querySoftwareName, queryStatus, queryFlatformId, queryCategoryLevel1,
 				queryCategoryLevel2, queryCategoryLevel3);
 		int currentPage = 1;
@@ -85,13 +87,13 @@ public class appController {
 		List<app_info> appInfoList = appInfoService.selectAppInfo(querySoftwareName, queryStatus, queryFlatformId,
 				queryCategoryLevel1, queryCategoryLevel2, queryCategoryLevel3,
 				(currentPage - 1) * pager.getRowPerPage(), pager.getRowPerPage());
-		// ��������
+		// 锟斤拷锟斤拷锟斤拷锟斤拷
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("categoryLevel1List", categoryLevel1List); // ����appһ���˵�
-		mav.addObject("statusList", statusList); // ����app״̬
-		mav.addObject("flatFormList", flatFormList); // ����app����ƽ̨
-		mav.addObject("pages", pager); // ��ҳ����
-		mav.addObject("appInfoList", appInfoList); // ��ʾ����
+		mav.addObject("categoryLevel1List", categoryLevel1List); // 锟斤拷锟斤拷app一锟斤拷锟剿碉拷
+		mav.addObject("statusList", statusList); // 锟斤拷锟斤拷app状态
+		mav.addObject("flatFormList", flatFormList); // 锟斤拷锟斤拷app锟斤拷锟斤拷平台
+		mav.addObject("pages", pager); // 锟斤拷页锟斤拷锟斤拷
+		mav.addObject("appInfoList", appInfoList); // 锟斤拷示锟斤拷锟斤拷
 		mav.setViewName("/developer/appinfolist");
 		return mav;
 	}
@@ -103,13 +105,13 @@ public class appController {
 		return categoryList;
 	}
 
-	// ��ת�������б�
+	// 锟斤拷转锟斤拷锟斤拷锟斤拷锟叫憋拷
 	@RequestMapping("/appinfoadd")
 	public String appinfoad(@ModelAttribute app_info app) {
 		return "/developer/appinfoadd";
 	}
 
-	// ��ȡ����ƽ̨
+	// 锟斤拷取锟斤拷锟斤拷平台
 	@RequestMapping("/datadictionarylist.json")
 	@ResponseBody
 	public Object dictionaryList() {
@@ -117,8 +119,8 @@ public class appController {
 		return dictionaryList;
 	}
 
-	// ��ȡһ���˵�
-	// ��ȡ����ƽ̨
+	// 锟斤拷取一锟斤拷锟剿碉拷
+	// 锟斤拷取锟斤拷锟斤拷平台
 	@RequestMapping("/categorylevel.json")
 	@ResponseBody
 	public Object categorylevellist() {
@@ -126,36 +128,36 @@ public class appController {
 		return categoryList;
 	}
 
-	// �����Ϣ��ʵ���ļ��ϴ�
+	// 锟斤拷锟斤拷锟较拷锟绞碉拷锟斤拷募锟斤拷洗锟�
 	@RequestMapping("/appinfoaddsave")
 	public String appinfoaddsave(app_info app, HttpSession session, HttpServletRequest request,
 			@RequestParam(value = "a_logoPicPath", required = false) MultipartFile mult) {
-		String logPicPath = ""; // ���浽����·��
-		String logLogPath = ""; // ��������·��
+		String logPicPath = ""; // 锟斤拷锟芥到锟斤拷锟斤拷路锟斤拷
+		String logLogPath = ""; // 锟斤拷锟斤拷锟斤拷锟斤拷路锟斤拷
 		if (!mult.isEmpty()) {
-			// ���÷�����·��
+			// 锟斤拷锟矫凤拷锟斤拷锟斤拷路锟斤拷
 			String path = request.getSession().getServletContext()
 					.getRealPath("statics" + File.separator + "uploadfiles");
-			// Դ�ļ���
+			// 源锟侥硷拷锟斤拷
 			String oldFileName = mult.getOriginalFilename();
-			// ��ȡ��׺
+			// 锟斤拷取锟斤拷缀
 			String suffix = FilenameUtils.getExtension(oldFileName);
-			// �����ļ���С
+			// 锟斤拷锟斤拷锟侥硷拷锟斤拷小
 			int fileSize = 5000000;
-			// �ϴ��ļ����ó���500kb
+			// 锟较达拷锟侥硷拷锟斤拷锟矫筹拷锟斤拷500kb
 			if (mult.getSize() > fileSize) {
-				request.setAttribute("uploadFileError", "* �ϴ��ļ���С���ó���500kb");
+				request.setAttribute("uploadFileError", "* 锟较达拷锟侥硷拷锟斤拷小锟斤拷锟矫筹拷锟斤拷500kb");
 				return "/developer/appinfoadd";
 			} else if (suffix.equalsIgnoreCase("jpg") || suffix.equalsIgnoreCase("jpeg")
-					|| suffix.equalsIgnoreCase("png")) { // �ļ���ʽ������
-															// jpg,jpeg,png��ʽ
-				// �µ�ͼƬ����
+					|| suffix.equalsIgnoreCase("png")) { // 锟侥硷拷锟斤拷式锟斤拷锟斤拷锟斤拷
+															// jpg,jpeg,png锟斤拷式
+				// 锟铰碉拷图片锟斤拷锟斤拷
 				String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + oldFileName;
 				File file = new File(path, fileName);
 				if (!file.exists()) {
 					file.mkdirs();
 				}
-				// ���浽������
+				// 锟斤拷锟芥到锟斤拷锟斤拷锟斤拷
 				try {
 					mult.transferTo(file);
 				} catch (Exception e) {
@@ -164,12 +166,12 @@ public class appController {
 				logPicPath = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
 				logLogPath = path + File.separator + fileName;
 			} else {
-				request.setAttribute("uploadFileError", "* �ļ���ʽ����ȷ");
+				request.setAttribute("uploadFileError", "* 锟侥硷拷锟斤拷式锟斤拷锟斤拷确");
 				return "/developer/appinfoadd";
 			}
 
 		}
-		// ���浽���ݿ�
+		// 锟斤拷锟芥到锟斤拷锟捷匡拷
 		app.setCreatedBy(((dev_user) session.getAttribute("devUser")).getId());
 		app.setCreationDate(new Date());
 		app.setLogoPicPath(logPicPath);
@@ -181,7 +183,7 @@ public class appController {
 
 	}
 
-	// ��֤apk�Ƿ����
+	// 锟斤拷证apk锟角凤拷锟斤拷锟�
 	@RequestMapping("/apkexist.json")
 	@ResponseBody
 	public Object apkexist(@RequestParam("APKName") String APKName) {
@@ -197,10 +199,10 @@ public class appController {
 		return "{\"APKName\":\"" + status + "\"}";
 	}
 
-	// ��ת���޸�ҳ��
+	// 锟斤拷转锟斤拷锟睫革拷页锟斤拷
 	@RequestMapping("/appinfomodify")
 	public ModelAndView appinfomodify(@RequestParam("id") Integer id) {
-		// ��ѯ�޸ĵ���Ϣ��ӵ�model��
+		// 锟斤拷询锟睫改碉拷锟斤拷息锟斤拷拥锟絤odel锟斤拷
 		app_info app = appInfoService.findAppInfo(id);
 		ModelAndView mav = new ModelAndView();
 		if (app != null) {
@@ -212,7 +214,7 @@ public class appController {
 		return mav;
 	}
 
-	// �޸���Ϣ
+	// 锟睫革拷锟斤拷息
 	@RequestMapping("/appinfomodifysave")
 	public String appinfomodifysave(app_info app, HttpSession session,
 			@RequestParam(value = "status", required = false) Integer status) {
@@ -221,7 +223,7 @@ public class appController {
 		if (status != null) {
 			app.setStatus(status);
 		}
-		// ����
+		// 锟斤拷锟斤拷
 		if (appInfoService.appinfomodify(app)) {
 			return "redirect:/devApp/flatform";
 		} else {
@@ -230,13 +232,13 @@ public class appController {
 
 	}
 
-	// ��ת�������汾ҳ��
+	// 锟斤拷转锟斤拷锟斤拷锟斤拷锟芥本页锟斤拷
 	@RequestMapping("/appversionadd")
 	public ModelAndView appversionadd(@RequestParam("id") Integer id) {
 		ModelAndView mav = new ModelAndView();
 		app_info app = appInfoService.findAppInfo(id);
 		if (app.getVersionId() != null) {
-			// ���app�з������汾�Ͳ�ѯ�����еİ汾
+			// 锟斤拷锟絘pp锟叫凤拷锟斤拷锟斤拷锟芥本锟酵诧拷询锟斤拷锟斤拷锟叫的版本
 			List<app_version> versionList = versionService.versionList(id);
 			mav.addObject("appVersionList", versionList);
 		}
@@ -245,56 +247,56 @@ public class appController {
 		return mav;
 	}
 
-	// �����汾
+	// 锟斤拷锟斤拷锟芥本
 	@RequestMapping("/addversionsave")
 	public String addversionsave(@RequestParam("appId") Integer appId,
 			@RequestParam("a_downloadLink") MultipartFile part, HttpServletRequest request, app_version version,
 			HttpSession session) {
-		String downloadLink = ""; // ��������
-		String apkLocPath = ""; // ������·��
-		String apkFileName = ""; // �ϴ�apk������
+		String downloadLink = ""; // 锟斤拷锟斤拷锟斤拷锟斤拷
+		String apkLocPath = ""; // 锟斤拷锟斤拷锟斤拷路锟斤拷
+		String apkFileName = ""; // 锟较达拷apk锟斤拷锟斤拷锟斤拷
 		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "apkFiles");
 		if (!part.isEmpty()) {
-			// ��ȡ�ļ���
+			// 锟斤拷取锟侥硷拷锟斤拷
 			String odlFileName = part.getOriginalFilename();
-			// ��ȡԴ�ļ�����׺
+			// 锟斤拷取源锟侥硷拷锟斤拷锟斤拷缀
 			String suffix = FilenameUtils.getExtension(odlFileName);
-			// �����ϴ��ļ��Ĵ�С
+			// 锟斤拷锟斤拷锟较达拷锟侥硷拷锟侥达拷小
 			int fileSize = 51200000;
 			if (part.getSize() > fileSize) {
-				request.setAttribute("fileUploadError", "* �ļ���С����500MB");
+				request.setAttribute("fileUploadError", "* 锟侥硷拷锟斤拷小锟斤拷锟斤拷500MB");
 				return "/developer/appversionadd";
 			} else if (suffix.equalsIgnoreCase("apk")) {
-				// ��ѯapp��APK����
+				// 锟斤拷询app锟斤拷APK锟斤拷锟斤拷
 				System.out.println(appId);
 				app_info appInfo = appInfoService.findAPKName(appId);
-				// �ļ���
+				// 锟侥硷拷锟斤拷
 				String fileName = appInfo.getAPKName() + "-" + version.getVersionNo() + ".apk";
 				File file = new File(path, fileName);
 				if (!file.exists()) {
 					file.mkdirs();
 				}
-				// ����
+				// 锟斤拷锟斤拷
 				try {
 					part.transferTo(file);
 				} catch (Exception e) {
 					e.printStackTrace();
-					request.setAttribute("fileUploadError", "* �ϴ�ʧ��");
+					request.setAttribute("fileUploadError", "* 锟较达拷失锟斤拷");
 					return "/developer/appversionadd";
 
 				}
-				// ��������·��
+				// 锟斤拷锟斤拷锟斤拷锟斤拷路锟斤拷
 				apkLocPath = path + File.separator + fileName;
-				// �ϴ�������
+				// 锟较达拷锟斤拷锟斤拷锟斤拷
 				apkFileName = fileName;
-				// ���ص�·��
+				// 锟斤拷锟截碉拷路锟斤拷
 				downloadLink = path.substring(path.lastIndexOf("/") + 70) + File.separator + fileName;
 			} else {
-				request.setAttribute("fileUploadError", "* �ϴ��ļ���ʽ����ȷ");
+				request.setAttribute("fileUploadError", "* 锟较达拷锟侥硷拷锟斤拷式锟斤拷锟斤拷确");
 				return "/developer/appversionadd";
 			}
 		}
-		// ���
+		// 锟斤拷锟�
 		version.setCreatedBy(((dev_user) session.getAttribute("devUser")).getId());
 		version.setCreationDate(new Date());
 		version.setDownloadLink(downloadLink);
@@ -306,21 +308,21 @@ public class appController {
 		return "/developer/appversionadd";
 	}
 
-	// ��ת���޸İ汾ҳ�沢��ѯ�汾��Ϣ
+	// 锟斤拷转锟斤拷锟睫改版本页锟芥并锟斤拷询锟芥本锟斤拷息
 	@RequestMapping("/appversionmodify")
 	public String appversionmodify(@RequestParam("vid") Integer versionid, @RequestParam("aid") Integer appinfoid,
 			Model model) {
-		// ��ѯ���еİ汾��Ϣ
+		// 锟斤拷询锟斤拷锟叫的版本锟斤拷息
 		app_info app = appInfoService.selectAppVersion(appinfoid);
-		model.addAttribute("appVersionList", app.getVersionList()); // ����id�������İ汾
-		// ��ѯapp�汾��Ϣ
+		model.addAttribute("appVersionList", app.getVersionList()); // 锟斤拷锟斤拷id锟斤拷锟斤拷锟斤拷锟侥版本
+		// 锟斤拷询app锟芥本锟斤拷息
 		app_version version = versionService.selectVersion(versionid, appinfoid);
 		model.addAttribute("appVersion", version);
 		return "/developer/appversionmodify";
 
 	}
 
-	// �޸İ汾
+	// 锟睫改版本
 	/**
 	 * @param version
 	 * @param session
@@ -333,19 +335,19 @@ public class appController {
 		if (versionService.updateVersion(version)) {
 			return "redirect:/devApp/flatform";
 		} else {
-			request.setAttribute("fileUploadError", "* �޸�ʧ��");
+			request.setAttribute("fileUploadError", "* 锟睫革拷失锟斤拷");
 			return "/developer/appversionmodify";
 		}
 
 	}
 
-	// �鿴app������Ϣ
+	// 锟介看app锟斤拷锟斤拷锟斤拷息
 	@RequestMapping("/appview/{id}")
 	public String appview(@PathVariable Integer id, Model model) {
-		// ��ѯapp�Ļ�����Ϣ
+		// 锟斤拷询app锟侥伙拷锟斤拷锟斤拷息
 		app_info appInfo = appInfoService.findAppInfo(id);
 		if (appInfo.getVersionId() != null) {
-			// ��ѯapp����ʷ�汾
+			// 锟斤拷询app锟斤拷锟斤拷史锟芥本
 			List<app_version> appVersionList = versionService.versionList(id);
 			model.addAttribute("appVersionList", appVersionList);
 		}
@@ -353,9 +355,30 @@ public class appController {
 		return "/developer/appinfoview";
 	}
 
-	// ���ز�ѯҳ��
+	// 锟斤拷锟截诧拷询页锟斤拷
 	@RequestMapping("/list")
 	public String list() {
 		return "redirect:/devApp/flatform";
+	}
+	//删除app信息
+	@RequestMapping("/delapp.json")
+	@ResponseBody
+	public Object delectAppInfo(@RequestParam("id")Integer id){
+		HashMap<String,String> delResult=new HashMap<String,String>();
+		String status="";
+		//查询要删除的app信息
+		app_info appInfo=appInfoService.findAPKName(id);
+		if(appInfo==null){
+			status="notexist";
+		}else{
+			//删除操作
+			if(appInfoService.delectApp(appInfo, id)){
+				status="true";
+			}else{
+				status="false";
+			}
+		}
+		delResult.put("delResult", status);
+		return delResult;
 	}
 }

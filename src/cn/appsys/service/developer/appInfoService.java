@@ -29,4 +29,6 @@ public interface appInfoService {
 	public app_info selectAppVersion(int id);
 	//按id查找apk名称
 	public app_info findAPKName(Integer id);
+	//删除app操作
+	public boolean delectApp(app_info appInfo,Integer id);
 }

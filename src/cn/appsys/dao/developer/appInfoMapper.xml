@@ -128,4 +128,7 @@ PUBLIC "mybatis-3-mapper"
 	<update id="updateVersionId">
 		UPDATE app_info set versionId=#{versionId} WHERE id=#{id}
 	</update>
+	<delete id="delectApp">
+	  delete from app_info where id=#{id}
+	</delete>
 </mapper>

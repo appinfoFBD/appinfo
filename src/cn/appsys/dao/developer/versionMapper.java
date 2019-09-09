@@ -19,4 +19,6 @@ public interface versionMapper {
 	public int updateVersion(app_version version);
 	//查询appId的所有版本
 	public List<app_version> versionList(@Param("appId") Integer appId);
+	//删除app的历史版本信息
+	public int delectVersion(@Param("appId")Integer appId);
 }
