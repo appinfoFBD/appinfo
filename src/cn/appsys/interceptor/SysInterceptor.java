@@ -31,6 +31,7 @@ public class SysInterceptor implements HandlerInterceptor {
 		HttpSession session=arg0.getSession();
 		dev_user devUser=(dev_user)session.getAttribute("devUser");
 		if(devUser==null){
+			
 			arg0.setAttribute("error", "ÇëÏÈµÇÂ¼");
 			arg0.getRequestDispatcher("/WEB-INF/jsp/devlogin.jsp").forward(arg0, arg1);
 			return false;
