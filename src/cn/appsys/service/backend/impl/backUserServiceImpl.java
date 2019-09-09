@@ -10,6 +10,7 @@ import cn.appsys.service.backend.backUserService;
 @Service("backUserService")
 public class backUserServiceImpl implements backUserService{
 	@Resource(name="backUserMapper")
+	
 	private backUserMapper backuserMapper;
 	
 	@Override
