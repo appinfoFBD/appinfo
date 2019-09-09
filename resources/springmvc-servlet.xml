@@ -69,6 +69,7 @@
 			</list>
 		</property>
 	</bean>
+	<!-- 拦截器 -->
 	<mvc:interceptors>
 	   <mvc:interceptor>
 	      <mvc:mapping path="/devApp/**"/>
