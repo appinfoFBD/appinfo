@@ -13,6 +13,7 @@ public class backend_user {
 	private BigInteger modifyBy; // 更新者
 	private Date modifyDate; // 更新时间
 	private String userPassword; // 用户密码
+	private String userTypeName;
 
 	public BigInteger getId() {
 		return id;
@@ -84,5 +85,13 @@ public class backend_user {
 
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+
+	public String getUserTypeName() {
+		return userTypeName;
+	}
+
+	public void setUserTypeName(String userTypeName) {
+		this.userTypeName = userTypeName;
 	}
 }

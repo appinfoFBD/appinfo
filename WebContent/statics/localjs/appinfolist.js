@@ -150,7 +150,7 @@ var saleSwitchAjax = function(appId,obj){
 				if(data.errorCode === 'exception000001'){
 					alert("对不起，系统出现异常，请联系IT管理员");
 				}else if(data.errorCode === 'param000001'){
-					alert("对不起，参数出现错误，您可能在进行非法操作");
+					alert("对不起，参数出现错误，您可能在进 行非法操作");
 				}
 			}
 		},

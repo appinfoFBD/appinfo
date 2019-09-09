@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-PUBLIC "mybatis-3-mapper"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.appsys.dao.backend.backUserMapper">
-   <select id="doLoing"  resultType="backend_user">
-     SELECT * FROM backend_user where userCode=#{userCode}
-   </select>
-</mapper>

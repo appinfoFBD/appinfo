@@ -33,11 +33,6 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="datasource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<property name="mapperLocations">
-			<list>
-				<value>classpath:cn/appsys/dao/**/*.xml</value>
-			</list>
-		</property>
 	</bean>
 	<!-- 自动注册mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

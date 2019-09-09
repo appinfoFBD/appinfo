@@ -31,6 +31,44 @@ public class app_info {
 	private Integer categoryLevel2;
 	private Integer categoryLevel3;
     private List<app_version> versionList; //app的版本集合
+    private int currPageNo = 1;
+    private int pageSize = 3;
+    private int pageCount;
+    private int totalCount;
+    public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		if(totalCount>0) {
+			this.totalCount = totalCount;
+			this.pageCount = totalCount%this.pageSize==0?(totalCount/this.pageSize):(totalCount/this.pageSize)+1;
+		}
+		
+	}
+	public int getCurrPageNo() {
+		return currPageNo;
+	}
+	public void setCurrPageNo(int currPageNo) {
+		if(currPageNo>0) {
+			this.currPageNo = (currPageNo-1)*this.pageSize;
+		}
+		
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public int getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(int pageCount) {
+		if(pageCount>0) {
+			this.pageCount = pageCount;
+		}
+		
+	}
 	public Integer getVersionId() {
 		return versionId;
 	}
